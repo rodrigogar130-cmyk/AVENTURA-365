@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0F172A">
+  <title>Aventura 365 · Dirección de Desarrollo Empresarial UAEMéx</title>
+  <meta name="description" content="Recorre Ciudad Universitaria, resuelve estaciones presenciales y desbloquea tu insignia de ganador.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="pasaporte-empresarial.css">
+</head>
+<body>
+  <div class="pas-wrapper" id="pasWrapper">
+    <header class="pas-topbar">
+      <div class="pas-topbar__brand">
+        <span class="pas-topbar__stamp" aria-hidden="true">🧭</span>
+        <div class="pas-topbar__titles">
+          <p class="pas-topbar__eyebrow">Dirección de Desarrollo Empresarial</p>
+          <h1 class="pas-topbar__title">Aventura 365</h1>
+        </div>
+      </div>
+      <div class="pas-topbar__stats" id="topbarProgress" aria-live="polite">
+        <span class="pas-stat"><strong id="topbarPoints">0</strong> puntos</span>
+        <span class="pas-stat"><strong id="topbarCount">0/3</strong> estaciones</span>
+        <span class="pas-stat"><strong id="topbarBadges">0</strong> insignias</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="pas-screen pas-screen--welcome is-active" id="screen-bienvenida" data-screen>
+        <div class="pas-welcome">
+          <div class="pas-welcome__copy">
+            <p class="pas-eyebrow">🎒 Comunidad Empresarial UAEMéx</p>
+            <h2 class="pas-welcome__title">Aventura 365</h2>
+            <p class="pas-welcome__sub">Recorre Ciudad Universitaria, descubre las áreas de la Dirección de Desarrollo Empresarial y desbloquea tu insignia de ganador.</p>
+            <p class="pas-welcome__text">
+              Eres estudiante de la UAEMéx y estás por iniciar una misión dentro de Ciudad Universitaria.
+              Visita cada estación, encuentra el cartel correspondiente, lee la información del área y
+              responde la adivinanza para avanzar. Completa las tres estaciones y desbloquea tu Insignia
+              de Ganador Aventura 365.
+            </p>
+            <div class="pas-welcome__areas" aria-label="Estaciones del recorrido">
+              <span class="pas-chip pas-chip--fomento">🔎 Fomento Empresarial</span>
+              <span class="pas-chip pas-chip--unidades">🤝 Unidades de Emprendimiento</span>
+              <span class="pas-chip pas-chip--incubacion">📈 Incubación de la Innovación</span>
+            </div>
+          </div>
+
+          <form class="pas-register" id="formRegistro" novalidate>
+            <div class="pas-register__head">
+              <p class="pas-register__step">Registro inicial</p>
+              <h3>Registra tu participación</h3>
+              <p>Usaremos estos datos únicamente para seguimiento, invitación a actividades y vinculación con la Comunidad Empresarial UAEMéx.</p>
+            </div>
+
+            <div class="pas-form-grid">
+              <label class="pas-field pas-field--wide">
+                <span>Nombre completo *</span>
+                <input type="text" name="nombre" autocomplete="name" required>
+              </label>
+              <label class="pas-field">
+                <span>Espacio académico *</span>
+                <input type="text" name="espacio" autocomplete="organization" required>
+              </label>
+              <label class="pas-field">
+                <span>Programa educativo *</span>
+                <input type="text" name="programa" autocomplete="organization-title" required>
+              </label>
+              <label class="pas-field">
+                <span>Semestre *</span>
+                <select name="semestre" required>
+                  <option value="">Selecciona una opción</option>
+                  <option>1.º</option><option>2.º</option><option>3.º</option>
+                  <option>4.º</option><option>5.º</option><option>6.º</option>
+                  <option>7.º</option><option>8.º</option><option>9.º</option>
+                  <option>10.º o más</option>
+                </select>
+              </label>
+              <label class="pas-field">
+                <span>Correo personal *</span>
+                <input type="email" name="correo" autocomplete="email" inputmode="email" required>
+              </label>
+              <label class="pas-field pas-field--wide">
+                <span>Teléfono / WhatsApp *</span>
+                <input type="tel" name="telefono" autocomplete="tel" inputmode="tel" required>
+              </label>
+            </div>
+
+            <label class="pas-consent">
+              <input type="checkbox" name="consentimiento" required>
+              <span>Acepto que mis datos sean utilizados únicamente para fines de seguimiento, invitación a actividades y vinculación con la Comunidad Empresarial UAEMéx.</span>
+            </label>
+            <p class="pas-form-error" id="registroError" role="alert" hidden></p>
+            <button class="pas-btn pas-btn--primary pas-btn--lg" type="submit">
+              Iniciar Aventura <span aria-hidden="true">→</span>
+            </button>
+          </form>
+        </div>
+      </section>
+
+      <section class="pas-screen pas-screen--map" id="screen-mapa" data-screen>
+        <div class="pas-map__head">
+          <p class="pas-eyebrow">🗺️ Ruta de juego</p>
+          <h2 class="pas-map__title">Hola, <span id="mapParticipantName">explorador</span></h2>
+          <p class="pas-map__text">Completa cada estación presencial para desbloquear la siguiente pista y acercarte a tu insignia final.</p>
+        </div>
+
+        <div class="pas-dashboard" aria-live="polite">
+          <div><span>Puntos actuales</span><strong id="pointsDisplay">0</strong></div>
+          <div><span>Estaciones</span><strong id="stationsDisplay">0/3</strong></div>
+          <div><span>Insignias</span><strong id="badgesDisplay">0</strong></div>
+        </div>
+
+        <div class="pas-progressbar" role="progressbar" aria-valuemin="0" aria-valuemax="3" aria-valuenow="0" id="progressBar">
+          <div class="pas-progressbar__fill" id="progressFill"></div>
+          <div class="pas-progressbar__label" id="progressLabel">0/3 estaciones completadas</div>
+        </div>
+        <p class="pas-motivation" id="motivationMessage" aria-live="polite">Tu primera misión está lista. Dirígete a la Facultad de Arquitectura y Diseño.</p>
+
+        <div class="pas-route">
+          <div class="pas-route__line" aria-hidden="true"></div>
+          <article class="pas-station pas-station--fomento" data-area="fomento">
+            <div class="pas-station__marker" aria-hidden="true">🔎</div>
+            <div class="pas-station__body">
+              <span class="pas-station__eyebrow">Estación 1</span>
+              <h3 class="pas-station__title">Estación 1: Fomento Empresarial</h3>
+              <p class="pas-station__location">Facultad de Arquitectura y Diseño</p>
+              <p class="pas-station__mission">Cartel físico con adivinanza</p>
+              <p class="pas-station__text">Dirígete a la Facultad de Arquitectura y Diseño. Busca el cartel de Fomento Empresarial, lee la información y responde la adivinanza para desbloquear la siguiente estación.</p>
+              <button class="pas-btn pas-btn--outline pas-btn--sm" data-open-mission="fomento">Responder adivinanza</button>
+              <span class="pas-station__status" aria-live="polite">Disponible</span>
+              <span class="pas-station__check" aria-hidden="true">✓</span>
+            </div>
+          </article>
+
+          <article class="pas-station pas-station--unidades is-locked" data-area="unidades">
+            <div class="pas-station__marker" aria-hidden="true">🤝</div>
+            <div class="pas-station__body">
+              <span class="pas-station__eyebrow">Estación 2</span>
+              <h3 class="pas-station__title">Estación 2: Unidades de Emprendimiento</h3>
+              <p class="pas-station__location">Facultad de Derecho</p>
+              <p class="pas-station__mission">Cartel físico con adivinanza</p>
+              <p class="pas-station__text">Dirígete a la Facultad de Derecho. Busca el cartel de Unidades de Emprendimiento, lee la información y responde la adivinanza para desbloquear la última estación.</p>
+              <button class="pas-btn pas-btn--outline pas-btn--sm" data-open-mission="unidades" disabled>🔒 Bloqueada</button>
+              <span class="pas-station__status" aria-live="polite">Completa la estación 1</span>
+              <span class="pas-station__check" aria-hidden="true">✓</span>
+            </div>
+          </article>
+
+          <article class="pas-station pas-station--incubacion is-locked" data-area="incubacion">
+            <div class="pas-station__marker" aria-hidden="true">📈</div>
+            <div class="pas-station__body">
+              <span class="pas-station__eyebrow">Estación 3</span>
+              <h3 class="pas-station__title">Estación 3: Incubación de la Innovación</h3>
+              <p class="pas-station__location">Facultad de Contaduría y Administración</p>
+              <p class="pas-station__mission">Cartel físico con adivinanza</p>
+              <p class="pas-station__text">Dirígete a la Facultad de Contaduría y Administración. Busca el cartel de Incubación de la Innovación, lee la información y responde la última adivinanza para completar Aventura 365.</p>
+              <button class="pas-btn pas-btn--outline pas-btn--sm" data-open-mission="incubacion" disabled>🔒 Bloqueada</button>
+              <span class="pas-station__status" aria-live="polite">Completa la estación 2</span>
+              <span class="pas-station__check" aria-hidden="true">✓</span>
+            </div>
+          </article>
+        </div>
+
+        <div class="pas-badges">
+          <h3 class="pas-badges__title">Insignias desbloqueadas</h3>
+          <div class="pas-badges__row">
+            <div class="pas-badge" data-badge="fomento"><span class="pas-badge__icon">🧭</span><span class="pas-badge__name">Explorador de Oportunidades</span></div>
+            <div class="pas-badge" data-badge="unidades"><span class="pas-badge__icon">🏗️</span><span class="pas-badge__name">Constructor de Comunidad</span></div>
+            <div class="pas-badge" data-badge="incubacion"><span class="pas-badge__icon">🚀</span><span class="pas-badge__name">Impulsor de Innovación</span></div>
+          </div>
+        </div>
+        <button class="pas-btn pas-btn--primary pas-btn--lg pas-map__finalBtn" id="btnVerFinal" hidden>
+          Ver mi insignia de ganador <span aria-hidden="true">🎉</span>
+        </button>
+      </section>
+
+      <section class="pas-screen pas-screen--final" id="screen-final" data-screen>
+        <div class="pas-final">
+          <p class="pas-eyebrow">🎉 Recorrido completo</p>
+          <h2 class="pas-final__title">Aventura 365 completada</h2>
+          <p class="pas-final__subtitle">Has recorrido las tres estaciones de la Dirección de Desarrollo Empresarial y desbloqueaste tu Insignia de Ganador.</p>
+          <div class="pas-passport-card aventura365-insignia-card" id="aventura365-insignia">
+            <div class="pas-passport-card__head">
+              <div>
+                <span>Dirección de Desarrollo Empresarial</span>
+                <h2>Ganador Aventura 365</h2>
+              </div>
+              <span class="pas-passport-card__seal" aria-hidden="true">🏆</span>
+            </div>
+            <div class="pas-passport-card__identity">
+              <div class="pas-passport-card__avatar" id="badgeInitials">A365</div>
+              <div>
+                <span>Participante</span>
+                <strong id="badgeName">—</strong>
+                <small><span id="badgeSpace">—</span> · <span id="badgeProgram">—</span></small>
+              </div>
+            </div>
+            <dl class="pas-passport-card__data">
+              <div><dt>Puntos obtenidos</dt><dd id="badgePoints">0</dd></div>
+              <div><dt>Fecha de finalización</dt><dd id="badgeDate">—</dd></div>
+              <div class="pas-passport-card__folio"><dt>Folio local</dt><dd id="badgeFolio">—</dd></div>
+            </dl>
+            <div class="pas-final__badges" aria-label="Insignias obtenidas">
+              <div class="pas-badge pas-badge--earned"><span class="pas-badge__icon">🧭</span><span class="pas-badge__name">Fomento Empresarial</span></div>
+              <div class="pas-badge pas-badge--earned"><span class="pas-badge__icon">🤝</span><span class="pas-badge__name">Unidades de Emprendimiento</span></div>
+              <div class="pas-badge pas-badge--earned"><span class="pas-badge__icon">🚀</span><span class="pas-badge__name">Incubación de la Innovación</span></div>
+            </div>
+          </div>
+
+          <p class="pas-final__text">
+            ¡Felicidades! Completaste las tres estaciones de Aventura 365. Ahora puedes integrarte
+            a la Comunidad Empresarial UAEMéx y recibir información sobre próximas actividades.
+          </p>
+          <p class="pas-final__next">Tu siguiente paso es registrarte o escribirnos para conocer próximas actividades.</p>
+          <div class="pas-final__actions">
+            <button class="pas-btn pas-btn--primary pas-btn--lg pas-final__primary-action" id="btnUnirme">Integrarme a la Comunidad Empresarial UAEMéx</button>
+            <div class="pas-final__secondary-actions">
+              <button class="pas-btn pas-btn--outline" id="btnActividades">Conocer próximas actividades</button>
+              <button class="pas-btn pas-btn--outline" id="btnDescargar">Descargar mi insignia</button>
+            </div>
+            <button class="pas-btn pas-btn--ghost pas-final__restart-action" id="btnReiniciar">Volver a jugar</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="pas-footer">
+      <span>Dirección de Desarrollo Empresarial · UAEMéx</span>
+      <button class="pas-admin-export" id="btnExportar" type="button" hidden>Exportar registros CSV</button>
+    </footer>
+  </div>
+
+  <div class="pas-modal" id="modalMision" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="misionTitulo">
+    <div class="pas-modal__backdrop" data-close-mission></div>
+    <div class="pas-modal__panel" tabindex="-1">
+      <button class="pas-modal__close" data-close-mission aria-label="Cerrar misión">✕</button>
+      <div class="pas-modal__scroll">
+        <div class="pas-mission-view" id="missionView-play">
+          <span class="pas-modal__eyebrow" id="misionEstacion">Estación</span>
+          <h3 class="pas-modal__title" id="misionTitulo">Nombre de la misión</h3>
+          <p class="pas-modal__subtitle" id="misionSubtitulo" hidden></p>
+          <p class="pas-modal__instruction" id="misionInstruccion">Instrucción</p>
+          <div class="pas-mission-options" id="misionOpciones"></div>
+          <p class="pas-mission-hint" id="misionPista" role="status"></p>
+        </div>
+        <div class="pas-mission-view" id="missionView-result" hidden>
+          <div class="pas-mission-result__badge" id="resultBadgeIcon">🏅</div>
+          <p class="pas-modal__eyebrow">Insignia desbloqueada</p>
+          <h3 class="pas-modal__title" id="resultBadgeName">Nombre de la insignia</h3>
+          <strong class="pas-mission-result__points" id="resultPoints">+100 puntos</strong>
+          <p class="pas-modal__instruction" id="resultMensaje">Mensaje de resultado</p>
+          <button class="pas-btn pas-btn--primary" id="btnContinuarMapa">Continuar recorrido</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pas-modal" id="modalAccion" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="actionModalTitle">
+    <div class="pas-modal__backdrop" data-close-action></div>
+    <div class="pas-modal__panel pas-modal__panel--small" tabindex="-1">
+      <button class="pas-modal__close" data-close-action aria-label="Cerrar">✕</button>
+      <div class="pas-modal__scroll">
+        <span class="pas-modal__eyebrow" id="actionModalEyebrow">Aventura 365</span>
+        <h3 class="pas-modal__title" id="actionModalTitle">Información</h3>
+        <p class="pas-modal__instruction" id="actionModalText"></p>
+        <div class="pas-action-buttons" id="actionModalButtons"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pas-toast-region" id="toastRegion" aria-live="polite" aria-atomic="true"></div>
+  <canvas id="pasConfetti" aria-hidden="true"></canvas>
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+  <script src="pasaporte-empresarial.js"></script>
+</body>
+</html>

@@ -1,0 +1,2142 @@
+/* =====================================================================
+   PASAPORTE EMPRESARIAL UAEMéx — Hoja de estilos
+   Todas las clases usan el prefijo "pas-" para no chocar con el CSS
+   del sitio principal de la Dirección de Desarrollo Empresarial.
+   ===================================================================== */
+
+:root{
+  /* --- Tema gamificado: edita aquí toda la identidad visual --- */
+  --pe-bg:#0F172A;
+  --pe-bg-soft:#111827;
+  --pe-surface:#FFFFFF;
+  --pe-surface-soft:#F8FAFC;
+  --pe-text:#10231F;
+  --pe-text-light:#FFFFFF;
+  --pe-muted:#64748B;
+  --pe-primary:#00C2FF;
+  --pe-secondary:#7C3AED;
+  --pe-accent:#FACC15;
+  --pe-green:#22C55E;
+  --pe-orange:#FB923C;
+  --pe-pink:#EC4899;
+  --pe-gradient-main:linear-gradient(135deg,#00C2FF 0%,#7C3AED 55%,#EC4899 100%);
+  --pe-gradient-success:linear-gradient(135deg,#22C55E 0%,#00C2FF 100%);
+  --pe-gradient-warning:linear-gradient(135deg,#FACC15 0%,#FB923C 100%);
+  --pe-gradient-card:linear-gradient(145deg,rgba(255,255,255,.98),rgba(248,250,252,.92));
+  --pe-radius-lg:28px;
+  --pe-radius-md:18px;
+  --pe-shadow-soft:0 18px 45px rgba(15,23,42,.16);
+  --pe-shadow-glow:0 0 32px rgba(0,194,255,.35);
+
+  /* Compatibilidad con los nombres originales del componente. */
+  --pas-verde-900:var(--pe-bg);
+  --pas-verde-700:var(--pe-secondary);
+  --pas-verde-500:var(--pe-primary);
+  --pas-verde-100:#E8F8FF;
+  --pas-oro-600:#C26A08;
+  --pas-oro-400:var(--pe-accent);
+  --pas-oro-100:#FFF8CF;
+  --pas-crema:var(--pe-surface-soft);
+  --pas-blanco:var(--pe-surface);
+  --pas-texto:var(--pe-text);
+  --pas-texto-suave:var(--pe-muted);
+  --pas-borde:#DDE5EE;
+  --pas-sombra-sm:0 5px 16px rgba(15,23,42,.1);
+  --pas-sombra-md:var(--pe-shadow-soft);
+  --pas-sombra-lg:0 28px 70px rgba(15,23,42,.28);
+  --pas-radio-sm:14px;
+  --pas-radio-md:var(--pe-radius-md);
+  --pas-radio-lg:var(--pe-radius-lg);
+  --pas-fuente-display:'Space Grotesk','Segoe UI',sans-serif;
+  --pas-fuente-texto:'Poppins','Segoe UI',sans-serif;
+  --pas-error:#A33636;
+}
+
+/* --- Reset local, no afecta el resto del sitio --- */
+.pas-wrapper, .pas-wrapper *, .pas-modal, .pas-modal *{
+  box-sizing:border-box;
+}
+
+html{ scroll-behavior:smooth; }
+body{
+  margin:0;
+  background:var(--pas-crema);
+}
+body.pas-modal-open{ overflow:hidden; }
+
+.pas-wrapper{
+  font-family:var(--pas-fuente-texto);
+  color:var(--pas-texto);
+  background:
+    radial-gradient(1200px 600px at 90% -10%, var(--pas-oro-100) 0%, transparent 60%),
+    radial-gradient(1000px 500px at -10% 10%, var(--pas-verde-100) 0%, transparent 55%),
+    var(--pas-crema);
+  min-height:100vh;
+  max-width:1180px;
+  margin:0 auto;
+  padding:0 20px 60px;
+  position:relative;
+  overflow-x:hidden;
+}
+
+.pas-wrapper h1, .pas-wrapper h2, .pas-wrapper h3{
+  font-family:var(--pas-fuente-display);
+  line-height:1.15;
+  margin:0;
+}
+
+.pas-eyebrow{
+  display:inline-block;
+  font-family:var(--pas-fuente-display);
+  font-size:.78rem;
+  font-weight:600;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--pas-verde-700);
+  background:var(--pas-verde-100);
+  padding:6px 14px;
+  border-radius:999px;
+  margin-bottom:14px;
+}
+
+/* =====================================================================
+   BARRA SUPERIOR
+   ===================================================================== */
+.pas-topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  flex-wrap:wrap;
+  padding:22px 0 18px;
+}
+
+.pas-topbar__brand{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+
+.pas-topbar__stamp{
+  font-size:1.6rem;
+  width:48px;height:48px;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--pas-verde-700);
+  color:var(--pas-oro-100);
+  border-radius:14px;
+  box-shadow:var(--pas-sombra-sm);
+}
+
+.pas-topbar__eyebrow{
+  margin:0;
+  font-size:.72rem;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+  color:var(--pas-texto-suave);
+  font-weight:600;
+}
+
+.pas-topbar__title{
+  font-size:1.15rem;
+  font-weight:700;
+  color:var(--pas-verde-900);
+}
+
+.pas-topbar__progress{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  background:var(--pas-blanco);
+  border:1px solid var(--pas-borde);
+  padding:8px 14px;
+  border-radius:999px;
+  box-shadow:var(--pas-sombra-sm);
+}
+
+.pas-topbar__stats{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+  justify-content:flex-end;
+}
+.pas-stat{
+  font-size:.78rem;
+  color:var(--pas-texto-suave);
+  background:var(--pas-blanco);
+  border:1px solid var(--pas-borde);
+  padding:8px 12px;
+  border-radius:999px;
+  box-shadow:var(--pas-sombra-sm);
+}
+.pas-stat strong{
+  color:var(--pas-verde-700);
+  font-family:var(--pas-fuente-display);
+}
+
+.pas-progress-dot{
+  width:10px;height:10px;
+  border-radius:50%;
+  background:var(--pas-borde);
+  transition:background .3s ease, transform .3s ease;
+}
+.pas-progress-dot.is-done{
+  background:var(--pas-oro-400);
+  transform:scale(1.15);
+}
+
+.pas-topbar__count{
+  font-size:.82rem;
+  font-weight:600;
+  color:var(--pas-verde-700);
+  margin-left:2px;
+}
+
+/* =====================================================================
+   PANTALLAS (screens) — sólo una visible a la vez
+   ===================================================================== */
+.pas-screen{
+  display:none;
+  animation:pasFadeUp .5s ease both;
+}
+.pas-screen.is-active{ display:block; }
+
+@keyframes pasFadeUp{
+  from{ opacity:0; transform:translateY(14px); }
+  to{ opacity:1; transform:translateY(0); }
+}
+
+/* =====================================================================
+   PANTALLA 1 — BIENVENIDA
+   ===================================================================== */
+.pas-welcome{
+  max-width:920px;
+  margin:20px auto 10px;
+  text-align:center;
+  padding:48px 32px;
+  background:var(--pas-blanco);
+  border-radius:var(--pas-radio-lg);
+  box-shadow:var(--pas-sombra-md);
+  border:1px solid var(--pas-borde);
+}
+
+.pas-welcome__copy{ max-width:720px; margin:0 auto; }
+
+.pas-welcome__title{
+  font-size:clamp(1.6rem, 3.2vw, 2.4rem);
+  color:var(--pas-verde-900);
+  margin-bottom:18px;
+}
+
+.pas-welcome__text{
+  color:var(--pas-texto-suave);
+  font-size:1.02rem;
+  line-height:1.7;
+  max-width:560px;
+  margin:0 auto 20px;
+}
+
+.pas-welcome__sub{
+  font-family:var(--pas-fuente-display);
+  font-weight:600;
+  color:var(--pas-oro-600);
+  margin-bottom:18px;
+}
+
+.pas-welcome__intro{
+  background:var(--pas-verde-100);
+  border-radius:var(--pas-radio-md);
+  padding:18px 22px;
+  color:var(--pas-verde-900);
+  font-size:.95rem;
+  line-height:1.65;
+  text-align:left;
+  margin-bottom:26px;
+}
+
+.pas-welcome__areas{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content:center;
+  margin-bottom:30px;
+}
+
+.pas-chip{
+  font-size:.82rem;
+  font-weight:600;
+  padding:8px 14px;
+  border-radius:999px;
+  border:1px solid var(--pas-borde);
+  background:var(--pas-crema);
+  color:var(--pas-texto);
+}
+.pas-chip--fomento{ border-color:#BFE1CE; color:var(--pas-verde-700); }
+.pas-chip--unidades{ border-color:#EBD8A0; color:var(--pas-oro-600); }
+.pas-chip--incubacion{ border-color:#9FC9BD; color:var(--pas-verde-900); }
+
+/* =====================================================================
+   BOTONES
+   ===================================================================== */
+.pas-btn{
+  font-family:var(--pas-fuente-display);
+  font-weight:600;
+  font-size:.95rem;
+  border:none;
+  border-radius:999px;
+  padding:13px 26px;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  justify-content:center;
+  transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+  text-decoration:none;
+}
+.pas-btn:focus-visible{
+  outline:3px solid var(--pas-oro-400);
+  outline-offset:2px;
+}
+.pas-btn:disabled{
+  opacity:.5;
+  cursor:not-allowed;
+  transform:none !important;
+  box-shadow:none !important;
+}
+
+.pas-btn--primary{
+  background:linear-gradient(135deg, var(--pas-verde-700), var(--pas-verde-900));
+  color:var(--pas-blanco);
+  box-shadow:var(--pas-sombra-sm);
+}
+.pas-btn--primary:hover{ transform:translateY(-2px); box-shadow:var(--pas-sombra-md); }
+.pas-btn--primary:disabled{
+  opacity:.45; cursor:not-allowed; transform:none; box-shadow:none;
+}
+
+.pas-btn--lg{ padding:16px 34px; font-size:1rem; }
+.pas-btn--sm{ padding:9px 18px; font-size:.85rem; }
+
+.pas-btn--outline{
+  background:var(--pas-blanco);
+  color:var(--pas-verde-700);
+  border:1.5px solid var(--pas-verde-700);
+}
+.pas-btn--outline:hover{ background:var(--pas-verde-100); transform:translateY(-2px); }
+
+.pas-btn--ghost{
+  background:transparent;
+  color:var(--pas-texto-suave);
+  border:1.5px dashed var(--pas-borde);
+}
+.pas-btn--ghost:hover{ color:var(--pas-verde-700); border-color:var(--pas-verde-500); }
+
+/* =====================================================================
+   PANTALLA 2 — MAPA
+   ===================================================================== */
+.pas-map__head{
+  text-align:center;
+  max-width:640px;
+  margin:26px auto 8px;
+}
+.pas-map__title{
+  font-size:clamp(1.4rem, 2.6vw, 2rem);
+  color:var(--pas-verde-900);
+  margin-bottom:10px;
+}
+.pas-map__text{
+  color:var(--pas-texto-suave);
+}
+
+.pas-dashboard{
+  max-width:640px;
+  margin:24px auto 0;
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:10px;
+}
+.pas-dashboard > div{
+  background:var(--pas-blanco);
+  border:1px solid var(--pas-borde);
+  border-radius:var(--pas-radio-sm);
+  padding:12px 14px;
+  text-align:center;
+  box-shadow:var(--pas-sombra-sm);
+}
+.pas-dashboard span{
+  display:block;
+  color:var(--pas-texto-suave);
+  font-size:.72rem;
+  margin-bottom:3px;
+}
+.pas-dashboard strong{
+  font:700 1.22rem var(--pas-fuente-display);
+  color:var(--pas-verde-700);
+}
+
+/* Barra de progreso */
+.pas-progressbar{
+  max-width:640px;
+  margin:26px auto 10px;
+  background:var(--pas-blanco);
+  border:1px solid var(--pas-borde);
+  border-radius:999px;
+  height:38px;
+  position:relative;
+  overflow:hidden;
+  box-shadow:var(--pas-sombra-sm);
+}
+.pas-progressbar__fill{
+  position:absolute; inset:0;
+  width:0%;
+  background:linear-gradient(90deg, var(--pas-verde-500), var(--pas-oro-400));
+  transition:width .5s ease;
+  border-radius:999px;
+}
+.pas-progressbar__label{
+  position:relative;
+  z-index:1;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:.85rem;
+  font-weight:700;
+  color:var(--pas-verde-900);
+  font-family:var(--pas-fuente-display);
+  mix-blend-mode:normal;
+}
+.pas-motivation{
+  max-width:700px;
+  margin:12px auto 0;
+  text-align:center;
+  color:var(--pas-verde-700);
+  font-weight:600;
+  line-height:1.5;
+}
+.pas-motivation.is-almost{
+  background:var(--pas-oro-100);
+  border:1px solid var(--pas-oro-400);
+  border-radius:999px;
+  padding:10px 18px;
+  animation:pasPulse 1.4s ease-in-out 2;
+}
+@keyframes pasPulse{ 50%{ transform:scale(1.025); } }
+
+/* Ruta / recorrido con las 3 estaciones */
+.pas-route{
+  position:relative;
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:26px;
+  margin:44px 0 30px;
+}
+
+.pas-route__line{
+  position:absolute;
+  top:34px;
+  left:8%;
+  right:8%;
+  height:3px;
+  background:repeating-linear-gradient(90deg, var(--pas-oro-400) 0 10px, transparent 10px 20px);
+  z-index:0;
+}
+
+.pas-station{
+  position:relative;
+  z-index:1;
+  background:var(--pas-blanco);
+  border:1px solid var(--pas-borde);
+  border-radius:var(--pas-radio-md);
+  padding:26px 20px 24px;
+  text-align:center;
+  box-shadow:var(--pas-sombra-sm);
+  transition:transform .2s ease, box-shadow .2s ease;
+}
+.pas-station:hover{
+  transform:translateY(-6px);
+  box-shadow:var(--pas-sombra-md);
+}
+
+.pas-station__marker{
+  width:60px;height:60px;
+  margin:0 auto 14px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.6rem;
+  border-radius:50%;
+  color:var(--pas-blanco);
+}
+.pas-station--fomento .pas-station__marker{ background:linear-gradient(135deg,#2F6B4F,#1F4D3A); }
+.pas-station--unidades .pas-station__marker{ background:linear-gradient(135deg,#C9A227,#B08D2E); }
+.pas-station--incubacion .pas-station__marker{ background:linear-gradient(135deg,#1F4D3A,#12332A); }
+
+.pas-station__eyebrow{
+  display:block;
+  font-size:.72rem;
+  font-weight:700;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--pas-texto-suave);
+  margin-bottom:6px;
+}
+
+.pas-station__title{
+  font-size:1.08rem;
+  color:var(--pas-verde-900);
+  margin-bottom:8px;
+}
+
+.pas-station__text{
+  font-size:.88rem;
+  color:var(--pas-texto-suave);
+  line-height:1.55;
+  margin-bottom:18px;
+  min-height:58px;
+}
+.pas-station__mission{
+  margin:10px 0 0;
+  color:var(--pas-oro-600);
+  font-size:.8rem;
+  font-weight:700;
+}
+.pas-station__location{
+  width:max-content;
+  max-width:100%;
+  margin:0 auto 10px;
+  padding:6px 10px;
+  border-radius:999px;
+  background:var(--pas-verde-100);
+  color:var(--pas-verde-700);
+  font-size:.76rem;
+  font-weight:700;
+  line-height:1.35;
+}
+.pas-station__status{
+  display:block;
+  font-size:.72rem;
+  color:var(--pas-texto-suave);
+  margin-top:10px;
+}
+.pas-station.is-locked{
+  opacity:.68;
+  filter:saturate(.55);
+}
+.pas-station.is-locked:hover{
+  transform:none;
+  box-shadow:var(--pas-sombra-sm);
+}
+.pas-station.is-complete .pas-station__status{
+  color:var(--pas-verde-700);
+  font-weight:700;
+}
+
+.pas-station__check{
+  position:absolute;
+  top:14px; right:14px;
+  width:26px;height:26px;
+  border-radius:50%;
+  background:var(--pas-verde-500);
+  color:var(--pas-blanco);
+  font-size:.8rem;
+  display:none;
+  align-items:center;justify-content:center;
+  font-weight:700;
+}
+.pas-station.is-complete .pas-station__check{ display:flex; }
+.pas-station.is-complete{ border-color:var(--pas-verde-500); }
+.pas-station.is-complete .pas-btn--outline{
+  background:var(--pas-verde-100);
+  color:var(--pas-verde-700);
+}
+
+/* Insignias */
+.pas-badges{
+  max-width:760px;
+  margin:26px auto 10px;
+  text-align:center;
+}
+.pas-badges__title{
+  font-size:1.02rem;
+  color:var(--pas-verde-900);
+  margin-bottom:16px;
+}
+.pas-badges__row{
+  display:flex;
+  gap:14px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+.pas-badge{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  background:var(--pas-blanco);
+  border:1.5px dashed var(--pas-borde);
+  border-radius:999px;
+  padding:10px 18px;
+  font-size:.85rem;
+  font-weight:600;
+  color:var(--pas-texto-suave);
+  opacity:.55;
+  transition:all .3s ease;
+}
+.pas-badge__icon{ font-size:1.1rem; }
+.pas-badge.is-earned, .pas-badge--earned{
+  opacity:1;
+  border-style:solid;
+  border-color:var(--pas-oro-400);
+  background:var(--pas-oro-100);
+  color:var(--pas-verde-900);
+  box-shadow:var(--pas-sombra-sm);
+}
+
+.pas-map__finalBtn{
+  display:block;
+  margin:30px auto 10px;
+}
+
+/* =====================================================================
+   PANTALLA FINAL
+   ===================================================================== */
+.pas-final{
+  max-width:800px;
+  margin:24px auto;
+  text-align:center;
+  background:var(--pas-blanco);
+  border-radius:var(--pas-radio-lg);
+  box-shadow:var(--pas-sombra-lg);
+  border:1px solid var(--pas-borde);
+  padding:52px 34px;
+}
+
+.pas-passport-card{
+  position:relative;
+  overflow:hidden;
+  text-align:left;
+  padding:28px;
+  margin:18px auto 28px;
+  border:2px solid var(--pas-oro-400);
+  border-radius:22px;
+  background:
+    radial-gradient(circle at 92% 8%, rgba(201,162,39,.2), transparent 30%),
+    linear-gradient(145deg,#fff 0%,#f8f3e6 100%);
+  box-shadow:inset 0 0 0 6px #fff, var(--pas-sombra-md);
+}
+.pas-passport-card::after{
+  content:"UAEMÉX";
+  position:absolute;
+  right:-18px;
+  bottom:35px;
+  font:800 3rem var(--pas-fuente-display);
+  color:rgba(31,77,58,.055);
+  transform:rotate(-90deg);
+  pointer-events:none;
+}
+.pas-passport-card__head{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:16px;
+  padding-bottom:18px;
+  border-bottom:1px dashed var(--pas-oro-600);
+}
+.pas-passport-card__head span{
+  color:var(--pas-oro-600);
+  font-size:.72rem;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+}
+.pas-passport-card__head h2{
+  color:var(--pas-verde-900);
+  font-size:clamp(1.15rem,3vw,1.55rem);
+  margin-top:4px;
+}
+.pas-passport-card__seal{ font-size:2.5rem !important; }
+.pas-passport-card__identity{
+  display:flex;
+  align-items:center;
+  gap:16px;
+  padding:20px 0;
+}
+.pas-passport-card__avatar{
+  width:62px;
+  height:62px;
+  flex:0 0 62px;
+  display:grid;
+  place-items:center;
+  border-radius:18px;
+  background:var(--pas-verde-700);
+  color:#fff;
+  font:700 1.15rem var(--pas-fuente-display);
+}
+.pas-passport-card__identity span,
+.pas-passport-card__identity small{
+  display:block;
+  color:var(--pas-texto-suave);
+  font-size:.78rem;
+}
+.pas-passport-card__identity strong{
+  display:block;
+  color:var(--pas-verde-900);
+  font:700 1.2rem var(--pas-fuente-display);
+  margin:2px 0;
+}
+.pas-passport-card__data{
+  display:grid;
+  grid-template-columns:.65fr 1fr 1.4fr;
+  gap:10px;
+  margin:0 0 20px;
+}
+.pas-passport-card__data div{
+  background:rgba(255,255,255,.75);
+  border:1px solid var(--pas-borde);
+  padding:10px 12px;
+  border-radius:10px;
+}
+.pas-passport-card__data dt{
+  color:var(--pas-texto-suave);
+  font-size:.68rem;
+  text-transform:uppercase;
+}
+.pas-passport-card__data dd{
+  margin:4px 0 0;
+  color:var(--pas-verde-900);
+  font-weight:700;
+  overflow-wrap:anywhere;
+}
+.pas-final__next{
+  color:var(--pas-verde-900);
+  background:var(--pas-verde-100);
+  border-radius:var(--pas-radio-sm);
+  padding:14px 18px;
+  font-weight:600;
+}
+
+.pas-final__stamp{
+  font-size:3rem;
+  margin-bottom:8px;
+}
+
+.pas-final__title{
+  font-size:clamp(1.4rem, 2.8vw, 2rem);
+  color:var(--pas-verde-900);
+  margin-bottom:10px;
+}
+
+.pas-final__subtitle{
+  max-width:610px;
+  margin:0 auto 22px;
+  color:var(--pas-texto-suave);
+  line-height:1.65;
+  font-weight:500;
+}
+
+.pas-final__text{
+  color:var(--pas-texto-suave);
+  line-height:1.7;
+  max-width:560px;
+  margin:0 auto 26px;
+}
+
+.pas-final__badges{
+  display:flex;
+  gap:12px;
+  justify-content:center;
+  flex-wrap:wrap;
+  margin-bottom:26px;
+}
+
+.pas-final__closing{
+  background:var(--pas-verde-100);
+  border-radius:var(--pas-radio-md);
+  padding:18px 22px;
+  color:var(--pas-verde-900);
+  font-size:.95rem;
+  line-height:1.6;
+  margin-bottom:28px;
+}
+
+.pas-final__actions{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:12px;
+  justify-content:center;
+}
+.pas-final__primary-action{
+  width:min(100%, 590px);
+}
+.pas-final__secondary-actions{
+  width:min(100%, 590px);
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+.pas-final__secondary-actions .pas-btn{ width:100%; }
+.pas-final__restart-action{ margin-top:2px; }
+
+/* =====================================================================
+   MODAL DE MISIÓN
+   ===================================================================== */
+.pas-modal{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  font-family:var(--pas-fuente-texto);
+}
+.pas-modal.is-open{ display:flex; }
+
+.pas-modal__backdrop{
+  position:absolute;
+  inset:0;
+  background:rgba(18,51,42,.55);
+  backdrop-filter:blur(2px);
+  animation:pasFadeIn .25s ease both;
+}
+@keyframes pasFadeIn{ from{opacity:0;} to{opacity:1;} }
+
+.pas-modal__panel{
+  position:relative;
+  background:var(--pas-crema);
+  border-radius:var(--pas-radio-lg);
+  max-width:560px;
+  width:100%;
+  max-height:88vh;
+  box-shadow:var(--pas-sombra-lg);
+  animation:pasPopIn .3s cubic-bezier(.2,.8,.3,1.1) both;
+  overflow:hidden;
+}
+.pas-modal__panel--small{ max-width:510px; }
+.pas-modal__panel--game{ max-width:820px; }
+@keyframes pasPopIn{
+  from{ opacity:0; transform:scale(.94) translateY(10px); }
+  to{ opacity:1; transform:scale(1) translateY(0); }
+}
+
+.pas-modal__scroll{
+  padding:34px 30px 30px;
+  overflow-y:auto;
+  max-height:88vh;
+}
+
+.pas-modal__close{
+  position:absolute;
+  top:14px; right:14px;
+  width:34px;height:34px;
+  border-radius:50%;
+  border:none;
+  background:var(--pas-blanco);
+  box-shadow:var(--pas-sombra-sm);
+  cursor:pointer;
+  font-size:.9rem;
+  color:var(--pas-texto-suave);
+  z-index:2;
+}
+.pas-modal__close:hover{ color:var(--pas-verde-700); }
+
+.pas-modal__eyebrow{
+  display:inline-block;
+  font-size:.72rem;
+  font-weight:700;
+  letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--pas-oro-600);
+  margin-bottom:10px;
+}
+
+.pas-modal__title{
+  font-size:1.35rem;
+  color:var(--pas-verde-900);
+  margin-bottom:12px;
+}
+.pas-modal__subtitle{
+  color:var(--pas-verde-700);
+  font-weight:700;
+  font-size:.9rem;
+  line-height:1.5;
+  margin:-2px 0 10px;
+}
+
+.pas-modal__instruction{
+  color:var(--pas-texto-suave);
+  line-height:1.65;
+  margin-bottom:22px;
+}
+
+/* Opciones de misión (single-select / multi-select / checklist) */
+.pas-mission-options{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin-bottom:24px;
+}
+.pas-mission-options--grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+}
+
+.pas-option{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:14px 16px;
+  border:1.5px solid var(--pas-borde);
+  border-radius:var(--pas-radio-sm);
+  background:var(--pas-blanco);
+  cursor:pointer;
+  font-size:.92rem;
+  font-weight:500;
+  color:var(--pas-texto);
+  transition:border-color .18s ease, background .18s ease, transform .12s ease;
+  text-align:left;
+}
+.pas-option:hover{ border-color:var(--pas-verde-500); transform:translateX(2px); }
+.pas-option__icon{ font-size:1.15rem; flex-shrink:0; }
+.pas-option__mark{
+  margin-left:auto;
+  width:22px;height:22px;
+  border-radius:50%;
+  border:2px solid var(--pas-borde);
+  flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;
+  font-size:.7rem;
+  color:transparent;
+  transition:all .18s ease;
+}
+.pas-option.is-selected{
+  border-color:var(--pas-oro-400);
+  background:var(--pas-oro-100);
+}
+.pas-option.is-selected .pas-option__mark{
+  background:var(--pas-oro-400);
+  border-color:var(--pas-oro-400);
+  color:var(--pas-blanco);
+}
+
+.pas-mission-hint{
+  font-size:.83rem;
+  color:var(--pas-texto-suave);
+  margin:-8px 0 18px;
+  line-height:1.5;
+}
+.pas-mission-hint.is-error{
+  color:var(--pas-error);
+  background:#FFF0F0;
+  padding:10px 12px;
+  border-radius:10px;
+  margin-top:0;
+}
+
+.pas-mission-confirm{ width:100%; }
+
+.pas-mission-options--riddle{
+  gap:14px;
+}
+
+.pas-riddle-card{
+  position:relative;
+  overflow:hidden;
+  padding:22px;
+  border:1px solid rgba(124,58,237,.16);
+  border-radius:20px;
+  background:
+    linear-gradient(135deg,rgba(0,194,255,.08),rgba(124,58,237,.08)),
+    var(--pas-blanco);
+  box-shadow:0 16px 36px rgba(15,23,42,.1);
+}
+
+.pas-riddle-card::before{
+  content:"";
+  position:absolute;
+  inset:0 0 auto;
+  height:6px;
+  background:var(--pe-gradient-main);
+}
+
+.pas-riddle-card__location{
+  display:inline-flex;
+  align-items:center;
+  max-width:100%;
+  margin:2px 0 16px;
+  padding:7px 11px;
+  border-radius:999px;
+  color:#fff;
+  background:var(--pe-gradient-main);
+  font-size:.78rem;
+  font-weight:800;
+  line-height:1.4;
+}
+
+.pas-riddle-card__text{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+  margin-bottom:20px;
+  padding:18px;
+  border:1px dashed rgba(124,58,237,.24);
+  border-radius:16px;
+  color:var(--pas-verde-900);
+  background:rgba(255,255,255,.78);
+  font:600 .96rem/1.6 var(--pas-fuente-display);
+}
+
+.pas-riddle-form{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:12px;
+  align-items:end;
+}
+
+.pas-riddle-form .pas-field{
+  min-width:0;
+}
+
+.pas-riddle-feedback{
+  grid-column:1/-1;
+  margin:0;
+  border-radius:12px;
+  font-size:.86rem;
+  font-weight:600;
+  line-height:1.5;
+}
+
+.pas-riddle-feedback.is-error,
+.pas-riddle-feedback.is-success{
+  padding:10px 12px;
+}
+
+.pas-riddle-feedback.is-error{
+  color:#9f1239;
+  background:#fff1f5;
+  border:1px solid rgba(236,72,153,.24);
+}
+
+.pas-riddle-feedback.is-success{
+  color:#166534;
+  background:#dcfce7;
+  border:1px solid rgba(34,197,94,.28);
+}
+
+/* Escenas visuales: pueden recibir una imagen real mediante
+   --pas-scene-image:url("ruta/escena.webp") sin cambiar los hotspots. */
+.pas-mission-options.is-scene{
+  display:block;
+  margin-bottom:14px;
+}
+.pas-game-counter{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-bottom:10px;
+  padding:9px 13px;
+  border-radius:12px;
+  background:var(--pas-verde-100);
+  color:var(--pas-verde-900);
+  font-size:.8rem;
+  font-weight:700;
+}
+.pas-game-counter__value{
+  color:var(--pas-oro-600);
+  font-family:var(--pas-fuente-display);
+}
+.pas-game-scene{
+  --pas-scene-image:none;
+  position:relative;
+  min-height:360px;
+  overflow:hidden;
+  isolation:isolate;
+  border:2px solid var(--pas-borde);
+  border-radius:20px;
+  background-image:
+    var(--pas-scene-image),
+    radial-gradient(circle at 15% 15%,rgba(255,255,255,.85),transparent 22%),
+    linear-gradient(155deg,#e7f1ec 0 57%,#d8c9a1 57% 61%,#f2e7c9 61%);
+  background-size:cover;
+  background-position:center;
+  cursor:crosshair;
+  box-shadow:inset 0 0 40px rgba(18,51,42,.07);
+}
+.pas-game-scene--fomento{
+  background-image:
+    var(--pas-scene-image),
+    linear-gradient(90deg,rgba(255,255,255,.5) 1px,transparent 1px),
+    linear-gradient(rgba(255,255,255,.5) 1px,transparent 1px),
+    linear-gradient(155deg,#dcece5 0 58%,#bd9e65 58% 62%,#ead8ae 62%);
+  background-size:cover,32px 32px,32px 32px,cover;
+}
+.pas-game-scene--team{
+  min-height:300px;
+  background-image:
+    var(--pas-scene-image),
+    linear-gradient(160deg,#e9f3ee 0 55%,#c0a46c 55% 60%,#ecdbb5 60%);
+}
+.pas-game-scene--incubacion{
+  background-image:
+    var(--pas-scene-image),
+    radial-gradient(circle at 78% 18%,rgba(201,162,39,.22),transparent 24%),
+    linear-gradient(150deg,#dfeee7 0 55%,#bca06b 55% 60%,#ead8ae 60%);
+}
+.pas-game-scene.is-wrong{ animation:pasSceneWrong .32s ease; }
+@keyframes pasSceneWrong{
+  30%{ box-shadow:inset 0 0 0 4px rgba(163,54,54,.42); }
+  65%{ transform:translateX(3px); }
+}
+.pas-scene-prop{
+  position:absolute;
+  z-index:1;
+  pointer-events:none;
+  user-select:none;
+  filter:drop-shadow(0 5px 6px rgba(18,51,42,.14));
+}
+.pas-scene-prop--board{
+  width:38%;
+  height:28%;
+  border:7px solid #9b7444;
+  border-radius:8px;
+  background:#f7f4e9;
+  box-shadow:inset 0 0 0 2px #fff;
+}
+.pas-scene-prop--desk{
+  width:62%;
+  height:13%;
+  border-radius:10px 10px 4px 4px;
+  background:#a97d4c;
+  box-shadow:0 11px 0 -5px #795332;
+}
+.pas-scene-prop--person{
+  font-size:3.1rem;
+  line-height:1;
+}
+.pas-scene-prop--plant{ font-size:3rem; }
+.pas-scene-label{
+  position:absolute;
+  top:9px;
+  left:10px;
+  z-index:2;
+  padding:5px 9px;
+  border-radius:999px;
+  background:rgba(255,255,255,.9);
+  color:var(--pas-verde-900);
+  font-size:.68rem;
+  font-weight:700;
+  pointer-events:none;
+}
+.pas-hotspot{
+  position:absolute;
+  z-index:4;
+  min-width:48px;
+  min-height:48px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:5px;
+  border:2px solid transparent;
+  border-radius:14px;
+  background:rgba(255,255,255,.08);
+  color:var(--pas-texto);
+  cursor:pointer;
+  font:inherit;
+  transform:translate(-50%,-50%);
+  filter:drop-shadow(0 4px 4px rgba(18,51,42,.2));
+  transition:transform .16s ease,background .16s ease,border-color .16s ease;
+}
+.pas-hotspot__icon{ font-size:2rem; line-height:1; }
+.pas-hotspot__label{
+  position:absolute;
+  left:50%;
+  bottom:calc(100% + 7px);
+  width:max-content;
+  max-width:150px;
+  padding:5px 8px;
+  border-radius:7px;
+  background:var(--pas-verde-900);
+  color:#fff;
+  font-size:.68rem;
+  opacity:0;
+  pointer-events:none;
+  transform:translate(-50%,4px);
+  transition:opacity .15s ease,transform .15s ease;
+}
+.pas-hotspot:hover:not(.is-found),
+.pas-hotspot:focus-visible{
+  background:rgba(255,255,255,.72);
+  border-color:var(--pas-oro-400);
+  transform:translate(-50%,-50%) scale(1.08);
+}
+.pas-hotspot:hover .pas-hotspot__label,
+.pas-hotspot:focus-visible .pas-hotspot__label{
+  opacity:1;
+  transform:translate(-50%,0);
+}
+.pas-hotspot:focus-visible{
+  outline:3px solid var(--pas-verde-700);
+  outline-offset:2px;
+}
+.pas-hotspot.is-found{
+  background:rgba(231,241,236,.94);
+  border-color:var(--pas-verde-500);
+  cursor:default;
+  filter:none;
+}
+.pas-hotspot.is-found::after{
+  content:"✓";
+  position:absolute;
+  top:-9px;
+  right:-9px;
+  width:22px;
+  height:22px;
+  display:grid;
+  place-items:center;
+  border-radius:50%;
+  background:var(--pas-verde-700);
+  color:#fff;
+  font-size:.7rem;
+  font-weight:800;
+  box-shadow:var(--pas-sombra-sm);
+}
+.pas-hotspot--concept{
+  gap:6px;
+  max-width:150px;
+  padding:8px 10px;
+  background:rgba(255,255,255,.9);
+  border-color:rgba(31,77,58,.22);
+  box-shadow:var(--pas-sombra-sm);
+}
+.pas-hotspot--concept .pas-hotspot__icon{ font-size:1.45rem; }
+.pas-hotspot--concept .pas-hotspot__visible-name{
+  font-size:.68rem;
+  font-weight:700;
+  line-height:1.15;
+}
+.pas-hotspot--distractor{ border-style:dashed; }
+.pas-game-inventory{
+  display:flex;
+  flex-wrap:wrap;
+  gap:6px;
+  margin-top:10px;
+}
+.pas-game-inventory__item{
+  padding:6px 9px;
+  border:1px dashed var(--pas-borde);
+  border-radius:999px;
+  background:#fff;
+  color:var(--pas-texto-suave);
+  font-size:.68rem;
+  font-weight:600;
+}
+.pas-game-inventory__item.is-found{
+  border-style:solid;
+  border-color:var(--pas-verde-500);
+  background:var(--pas-verde-100);
+  color:var(--pas-verde-700);
+}
+.pas-difference-board{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.pas-difference-board .pas-hotspot.is-found{
+  box-shadow:0 0 0 5px rgba(47,107,79,.25);
+}
+
+/* Resultado de misión */
+.pas-mission-result__badge{
+  font-size:3rem;
+  text-align:center;
+  margin-bottom:6px;
+}
+.pas-mission-result__points{
+  display:inline-block;
+  color:var(--pas-verde-700);
+  background:var(--pas-verde-100);
+  border-radius:999px;
+  padding:8px 14px;
+  margin:0 0 12px;
+}
+#missionView-result{ text-align:center; }
+#missionView-result .pas-mission-confirm,
+#missionView-result .pas-btn{ width:100%; }
+
+/* =====================================================================
+   CONFETI
+   ===================================================================== */
+#pasConfetti{
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:9000;
+  display:none;
+  opacity:.88;
+}
+#pasConfetti.is-active{ display:block; }
+
+/* =====================================================================
+   RESPONSIVE — TABLET
+   ===================================================================== */
+@media (max-width: 900px){
+  .pas-route{ grid-template-columns:1fr; }
+  .pas-route__line{ display:none; }
+  .pas-topbar{ justify-content:center; text-align:center; }
+}
+
+/* =====================================================================
+   RESPONSIVE — MÓVIL
+   ===================================================================== */
+@media (max-width: 560px){
+  .pas-wrapper{ padding:0 14px 40px; }
+  .pas-topbar{ flex-direction:column; gap:12px; padding:16px 0; }
+  .pas-welcome{ padding:32px 20px; border-radius:var(--pas-radio-md); }
+  .pas-welcome__intro{ text-align:left; }
+  .pas-final{ padding:36px 20px; }
+  .pas-final__actions{ flex-direction:column; }
+  .pas-final__actions .pas-btn{ width:100%; }
+  .pas-modal__scroll{ padding:28px 18px 22px; }
+  .pas-btn--lg{ width:100%; }
+}
+
+/* =====================================================================
+   REGISTRO, ORDENAMIENTO, TOASTS Y ACCIONES AUXILIARES
+   ===================================================================== */
+.pas-register{
+  margin-top:30px;
+  padding:26px;
+  text-align:left;
+  background:var(--pas-crema);
+  border:1px solid var(--pas-borde);
+  border-radius:var(--pas-radio-md);
+}
+.pas-register__head{ margin-bottom:20px; }
+.pas-register__head h3{ color:var(--pas-verde-900); font-size:1.25rem; }
+.pas-register__head p{ color:var(--pas-texto-suave); line-height:1.5; margin:7px 0 0; font-size:.88rem; }
+.pas-register__step{
+  display:inline-block;
+  color:var(--pas-oro-600) !important;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  font-size:.7rem !important;
+}
+.pas-form-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+.pas-field{ display:flex; flex-direction:column; gap:6px; }
+.pas-field--wide{ grid-column:1/-1; }
+.pas-field span,
+.pas-interests legend{
+  color:var(--pas-verde-900);
+  font-size:.78rem;
+  font-weight:700;
+}
+.pas-field input,
+.pas-field select{
+  width:100%;
+  min-height:44px;
+  padding:10px 12px;
+  border:1.5px solid var(--pas-borde);
+  border-radius:10px;
+  background:#fff;
+  color:var(--pas-texto);
+  font:inherit;
+}
+.pas-field input:focus,
+.pas-field select:focus{
+  outline:3px solid rgba(201,162,39,.28);
+  border-color:var(--pas-oro-600);
+}
+.pas-field input[aria-invalid="true"],
+.pas-field select[aria-invalid="true"]{ border-color:var(--pas-error); }
+.pas-consent{
+  display:flex;
+  align-items:flex-start;
+  gap:8px;
+  color:var(--pas-texto-suave);
+  font-size:.78rem;
+  line-height:1.45;
+}
+.pas-register input[type="checkbox"]{
+  accent-color:var(--pas-verde-700);
+  flex:0 0 auto;
+  margin-top:2px;
+}
+.pas-consent{
+  padding:14px;
+  border-radius:10px;
+  background:var(--pas-verde-100);
+  margin-bottom:16px;
+}
+.pas-form-error{
+  color:var(--pas-error);
+  background:#FFF0F0;
+  border-radius:10px;
+  padding:10px 12px;
+  font-size:.83rem;
+}
+.pas-action-buttons{ display:flex; flex-wrap:wrap; gap:10px; }
+.pas-action-buttons .pas-btn{ flex:1 1 180px; }
+.pas-toast-region{
+  position:fixed;
+  right:18px;
+  bottom:18px;
+  z-index:11000;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+  width:min(360px,calc(100vw - 36px));
+  pointer-events:none;
+}
+.pas-toast{
+  background:var(--pas-verde-900);
+  color:#fff;
+  border-left:4px solid var(--pas-oro-400);
+  border-radius:10px;
+  padding:12px 14px;
+  box-shadow:var(--pas-sombra-lg);
+  font:500 .84rem/1.45 var(--pas-fuente-texto);
+  animation:pasToastIn .25s ease both;
+}
+@keyframes pasToastIn{ from{ opacity:0; transform:translateY(8px); } }
+.pas-shake{ animation:pasShake .32s ease; }
+@keyframes pasShake{ 25%{transform:translateX(-5px)} 50%{transform:translateX(5px)} 75%{transform:translateX(-3px)} }
+.pas-footer{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  flex-wrap:wrap;
+  padding-top:36px;
+  color:var(--pas-texto-suave);
+  font-size:.72rem;
+}
+.pas-admin-export{
+  border:0;
+  background:transparent;
+  color:var(--pas-texto-suave);
+  text-decoration:underline;
+  cursor:pointer;
+  font:inherit;
+}
+
+@media (max-width:700px){
+  .pas-passport-card__data{ grid-template-columns:1fr 1fr; }
+  .pas-passport-card__folio{ grid-column:1/-1; }
+}
+@media (max-width:560px){
+  .pas-topbar__stats{ justify-content:center; }
+  .pas-stat{ padding:7px 9px; font-size:.7rem; }
+  .pas-register{ padding:20px 16px; }
+  .pas-form-grid{ grid-template-columns:1fr; }
+  .pas-field--wide{ grid-column:auto; }
+  .pas-dashboard{ gap:6px; }
+  .pas-dashboard > div{ padding:10px 5px; }
+  .pas-dashboard span{ font-size:.64rem; }
+  .pas-passport-card{ padding:20px 16px; }
+  .pas-passport-card__head{ align-items:center; }
+  .pas-passport-card__seal{ font-size:2rem !important; }
+  .pas-passport-card__identity{ align-items:flex-start; }
+  .pas-passport-card__identity small{ line-height:1.4; }
+  .pas-passport-card__data{ grid-template-columns:1fr; }
+  .pas-passport-card__folio{ grid-column:auto; }
+  .pas-final__secondary-actions{ grid-template-columns:1fr; }
+  .pas-modal{ padding:8px; align-items:flex-end; }
+  .pas-modal__panel{ max-height:94vh; border-radius:20px 20px 8px 8px; }
+  .pas-modal__scroll{ max-height:94vh; padding:32px 16px 20px; }
+  .pas-riddle-card{ padding:18px 14px; }
+  .pas-riddle-card__location{ border-radius:14px; }
+  .pas-riddle-card__text{ padding:14px; font-size:.88rem; }
+  .pas-riddle-form{ grid-template-columns:1fr; }
+  .pas-riddle-form .pas-btn{ width:100%; }
+  .pas-mission-options--grid{ grid-template-columns:1fr; }
+  .pas-game-scene{ min-height:310px; }
+  .pas-game-scene--team{ min-height:255px; }
+  .pas-game-scene--incubacion{ min-height:350px; }
+  .pas-difference-board{ grid-template-columns:1fr; }
+  .pas-hotspot{ min-width:44px; min-height:44px; }
+  .pas-hotspot__icon{ font-size:1.7rem; }
+  .pas-hotspot--concept{
+    max-width:105px;
+    padding:7px;
+  }
+  .pas-hotspot--concept .pas-hotspot__icon{ font-size:1.2rem; }
+  .pas-hotspot--concept .pas-hotspot__visible-name{ font-size:.6rem; }
+}
+
+/* =====================================================================
+   TEMA VISUAL GAMIFICADO
+   Esta capa modifica solo presentación; no altera la lógica del juego.
+   ===================================================================== */
+body{
+  min-height:100vh;
+  font-family:var(--pas-fuente-texto);
+  background:
+    radial-gradient(circle at 7% 8%,rgba(0,194,255,.3),transparent 30%),
+    radial-gradient(circle at 94% 10%,rgba(236,72,153,.25),transparent 29%),
+    radial-gradient(circle at 50% 100%,rgba(124,58,237,.34),transparent 40%),
+    var(--pe-bg);
+  background-attachment:fixed;
+  color:var(--pe-text);
+  isolation:isolate;
+}
+body::before,
+body::after{
+  content:"";
+  position:fixed;
+  z-index:-1;
+  pointer-events:none;
+  border-radius:50%;
+  filter:blur(10px);
+  opacity:.6;
+}
+body::before{
+  width:220px;
+  height:220px;
+  left:-85px;
+  top:42%;
+  border:1px solid rgba(255,255,255,.2);
+  box-shadow:
+    0 0 0 35px rgba(0,194,255,.035),
+    0 0 0 70px rgba(124,58,237,.025);
+}
+body::after{
+  width:150px;
+  height:150px;
+  right:-45px;
+  bottom:8%;
+  background:rgba(236,72,153,.12);
+  box-shadow:0 0 70px rgba(236,72,153,.35);
+}
+.pas-wrapper{
+  max-width:1220px;
+  background:transparent;
+  overflow:visible;
+}
+.pas-wrapper::before{
+  content:"";
+  position:absolute;
+  top:110px;
+  right:4%;
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:var(--pe-accent);
+  box-shadow:
+    -90px 38px 0 rgba(0,194,255,.65),
+    35px 92px 0 rgba(236,72,153,.55),
+    -170px 155px 0 rgba(124,58,237,.5);
+  pointer-events:none;
+}
+.pas-wrapper h1,
+.pas-wrapper h2,
+.pas-wrapper h3{
+  font-family:var(--pas-fuente-display);
+  letter-spacing:-.035em;
+}
+
+/* Header y navegación de estado */
+.pas-topbar{
+  padding:24px 4px 20px;
+}
+.pas-topbar__stamp{
+  width:54px;
+  height:54px;
+  border-radius:18px;
+  background:var(--pe-gradient-main);
+  box-shadow:var(--pe-shadow-glow),0 14px 28px rgba(124,58,237,.28);
+  transform:rotate(-3deg);
+}
+.pas-topbar__eyebrow{ color:rgba(255,255,255,.6); }
+.pas-topbar__title{
+  color:#fff;
+  font-size:1.28rem;
+}
+.pas-topbar__stats{ gap:10px; }
+.pas-stat{
+  color:rgba(255,255,255,.72);
+  background:rgba(15,23,42,.58);
+  border:1px solid rgba(255,255,255,.16);
+  box-shadow:0 10px 30px rgba(0,0,0,.2);
+  backdrop-filter:blur(16px);
+}
+.pas-stat strong{ color:var(--pe-primary); }
+
+/* Bienvenida y registro */
+.pas-welcome{
+  position:relative;
+  overflow:hidden;
+  max-width:960px;
+  margin-top:24px;
+  padding:52px 42px 42px;
+  background:rgba(255,255,255,.94);
+  border:1px solid rgba(255,255,255,.65);
+  box-shadow:0 28px 80px rgba(0,0,0,.32),0 0 55px rgba(0,194,255,.1);
+  backdrop-filter:blur(22px);
+}
+.pas-welcome::before{
+  content:"";
+  position:absolute;
+  inset:0 0 auto;
+  height:7px;
+  background:var(--pe-gradient-main);
+}
+.pas-welcome::after{
+  content:"✦";
+  position:absolute;
+  right:34px;
+  top:28px;
+  color:var(--pe-pink);
+  font-size:1.5rem;
+  opacity:.7;
+  animation:pasFloat 3.8s ease-in-out infinite;
+}
+@keyframes pasFloat{
+  50%{ transform:translateY(-7px) rotate(8deg); }
+}
+.pas-eyebrow{
+  color:var(--pe-secondary);
+  background:linear-gradient(135deg,rgba(0,194,255,.12),rgba(124,58,237,.11));
+  border:1px solid rgba(124,58,237,.16);
+}
+.pas-welcome__title{
+  font-size:clamp(2.15rem,5vw,3.75rem);
+  line-height:1;
+  color:transparent;
+  background:var(--pe-gradient-main);
+  -webkit-background-clip:text;
+  background-clip:text;
+  margin-bottom:20px;
+}
+.pas-welcome__text{
+  max-width:680px;
+  font-size:1.02rem;
+  color:#51636f;
+}
+.pas-welcome__areas{ gap:9px; }
+.pas-chip{
+  padding:9px 14px;
+  background:#fff;
+  box-shadow:0 8px 20px rgba(15,23,42,.07);
+}
+.pas-chip--fomento{ border-color:rgba(0,194,255,.45); color:#087da2; }
+.pas-chip--unidades{ border-color:rgba(124,58,237,.38); color:var(--pe-secondary); }
+.pas-chip--incubacion{ border-color:rgba(34,197,94,.42); color:#168340; }
+.pas-register{
+  position:relative;
+  margin-top:34px;
+  padding:30px;
+  background:var(--pe-gradient-card);
+  border:1px solid rgba(124,58,237,.14);
+  box-shadow:0 20px 45px rgba(15,23,42,.11);
+}
+.pas-register__step{
+  color:var(--pe-secondary) !important;
+  background:rgba(124,58,237,.09);
+  padding:5px 9px;
+  border-radius:999px;
+}
+.pas-register__head h3{ font-size:1.4rem; }
+.pas-field span{ color:#263b45; }
+.pas-field input,
+.pas-field select{
+  min-height:49px;
+  border:1.5px solid #d8e1ea;
+  border-radius:13px;
+  background:rgba(255,255,255,.92);
+  box-shadow:0 5px 15px rgba(15,23,42,.035);
+  transition:border-color .18s ease,box-shadow .18s ease,transform .18s ease;
+}
+.pas-field input:hover,
+.pas-field select:hover{ border-color:rgba(0,194,255,.55); }
+.pas-field input:focus,
+.pas-field select:focus{
+  outline:none;
+  border-color:var(--pe-primary);
+  box-shadow:0 0 0 4px rgba(0,194,255,.14),0 8px 22px rgba(124,58,237,.08);
+  transform:translateY(-1px);
+}
+.pas-consent{
+  border:1px solid rgba(34,197,94,.18);
+  background:linear-gradient(135deg,rgba(34,197,94,.1),rgba(0,194,255,.08));
+}
+.pas-register input[type="checkbox"]{
+  width:17px;
+  height:17px;
+  accent-color:var(--pe-secondary);
+}
+.pas-form-error{
+  color:#9f1239;
+  border:1px solid rgba(236,72,153,.22);
+  background:#fff1f5;
+}
+
+/* Botones */
+.pas-btn{
+  min-height:44px;
+  font-family:var(--pas-fuente-texto);
+  font-weight:700;
+  letter-spacing:-.01em;
+  transition:transform .2s ease,box-shadow .2s ease,filter .2s ease,border-color .2s ease;
+}
+.pas-btn--primary{
+  color:#fff;
+  background:var(--pe-gradient-main);
+  box-shadow:0 14px 30px rgba(124,58,237,.32);
+}
+.pas-btn--primary:hover{
+  transform:translateY(-3px) scale(1.012);
+  box-shadow:0 18px 38px rgba(0,194,255,.3),0 8px 25px rgba(124,58,237,.25);
+  filter:brightness(1.07);
+}
+.pas-btn--outline{
+  color:var(--pe-secondary);
+  border:1.5px solid rgba(124,58,237,.35);
+  background:rgba(255,255,255,.88);
+  box-shadow:0 8px 18px rgba(15,23,42,.06);
+}
+.pas-btn--outline:hover{
+  color:#fff;
+  border-color:transparent;
+  background:var(--pe-gradient-main);
+  box-shadow:0 12px 26px rgba(124,58,237,.24);
+}
+.pas-btn--ghost{
+  color:var(--pe-secondary);
+  border-color:rgba(124,58,237,.25);
+  background:rgba(124,58,237,.04);
+}
+.pas-btn:focus-visible{
+  outline:3px solid var(--pe-accent);
+  outline-offset:3px;
+}
+
+/* Mapa, progreso y estaciones */
+.pas-map__head{ margin-top:34px; }
+.pas-map__head .pas-eyebrow{
+  color:#fff;
+  background:rgba(255,255,255,.08);
+  border-color:rgba(255,255,255,.18);
+  backdrop-filter:blur(12px);
+}
+.pas-map__title{
+  color:#fff;
+  font-size:clamp(2rem,4vw,3rem);
+}
+.pas-map__text{ color:rgba(255,255,255,.68); }
+.pas-dashboard > div{
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(255,255,255,.16);
+  box-shadow:0 12px 30px rgba(0,0,0,.18);
+  backdrop-filter:blur(14px);
+}
+.pas-dashboard span{ color:rgba(255,255,255,.62); }
+.pas-dashboard strong{ color:#fff; }
+.pas-dashboard > div:first-child strong{ color:var(--pe-accent); }
+.pas-progressbar{
+  height:42px;
+  background:rgba(15,23,42,.58);
+  border-color:rgba(255,255,255,.16);
+  box-shadow:0 12px 30px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.06);
+}
+.pas-progressbar__fill{
+  background:var(--pe-gradient-main);
+  box-shadow:0 0 24px rgba(0,194,255,.45);
+}
+.pas-progressbar__label{
+  color:#fff;
+  text-shadow:0 1px 5px rgba(0,0,0,.55);
+}
+.pas-motivation{
+  width:max-content;
+  max-width:min(720px,100%);
+  padding:10px 18px;
+  border:1px solid rgba(255,255,255,.14);
+  border-radius:999px;
+  color:rgba(255,255,255,.9);
+  background:rgba(255,255,255,.07);
+  backdrop-filter:blur(12px);
+}
+.pas-motivation.is-almost{
+  color:#fff;
+  background:linear-gradient(135deg,rgba(250,204,21,.22),rgba(251,146,60,.18));
+  border-color:rgba(250,204,21,.55);
+}
+.pas-route__line{
+  height:4px;
+  background:linear-gradient(90deg,var(--pe-primary),var(--pe-secondary),var(--pe-pink),var(--pe-green));
+  opacity:.62;
+  box-shadow:0 0 18px rgba(0,194,255,.3);
+}
+.pas-station{
+  --station-color-1:var(--pe-primary);
+  --station-color-2:var(--pe-secondary);
+  overflow:hidden;
+  padding:30px 22px 25px;
+  border:1px solid rgba(255,255,255,.7);
+  border-radius:24px;
+  background:var(--pe-gradient-card);
+  box-shadow:0 18px 42px rgba(0,0,0,.24);
+}
+.pas-station::before{
+  content:"";
+  position:absolute;
+  inset:0 0 auto;
+  height:6px;
+  background:linear-gradient(90deg,var(--station-color-1),var(--station-color-2));
+}
+.pas-station--fomento{
+  --station-color-1:var(--pe-primary);
+  --station-color-2:var(--pe-accent);
+}
+.pas-station--unidades{
+  --station-color-1:var(--pe-secondary);
+  --station-color-2:var(--pe-pink);
+}
+.pas-station--incubacion{
+  --station-color-1:var(--pe-green);
+  --station-color-2:var(--pe-orange);
+}
+.pas-station:not(.is-locked):not(.is-complete){
+  border-color:color-mix(in srgb,var(--station-color-1) 50%,white);
+  animation:pasActiveCard 2.4s ease-in-out infinite;
+}
+@keyframes pasActiveCard{
+  50%{ box-shadow:0 21px 48px rgba(0,0,0,.26),0 0 26px color-mix(in srgb,var(--station-color-1) 28%,transparent); }
+}
+.pas-station:hover:not(.is-locked){
+  transform:translateY(-8px) scale(1.012);
+}
+.pas-station__marker{
+  width:68px;
+  height:68px;
+  font-size:1.85rem;
+  background:linear-gradient(135deg,var(--station-color-1),var(--station-color-2)) !important;
+  box-shadow:0 13px 28px color-mix(in srgb,var(--station-color-1) 34%,transparent);
+}
+.pas-station__eyebrow{ color:var(--station-color-1); }
+.pas-station__title{ font-size:1.17rem; }
+.pas-station__mission{ color:var(--station-color-1); }
+.pas-station .pas-btn--outline{
+  color:color-mix(in srgb,var(--station-color-1) 72%,#111827);
+  border-color:color-mix(in srgb,var(--station-color-1) 52%,white);
+}
+.pas-station .pas-btn--outline:hover{
+  color:#fff;
+  background:linear-gradient(135deg,var(--station-color-1),var(--station-color-2));
+}
+.pas-station__status{
+  width:max-content;
+  margin:11px auto 0;
+  padding:4px 9px;
+  border-radius:999px;
+  background:rgba(100,116,139,.08);
+}
+.pas-station.is-locked{
+  opacity:.56;
+  filter:saturate(.35);
+}
+.pas-station.is-complete{
+  border-color:var(--pe-green);
+  box-shadow:0 18px 42px rgba(0,0,0,.2),0 0 24px rgba(34,197,94,.18);
+}
+.pas-station__check{
+  width:31px;
+  height:31px;
+  background:var(--pe-gradient-success);
+  box-shadow:0 7px 18px rgba(34,197,94,.32);
+}
+.pas-badges__title{ color:#fff; }
+.pas-badge{
+  min-height:48px;
+  color:rgba(255,255,255,.55);
+  background:rgba(255,255,255,.07);
+  border-color:rgba(255,255,255,.18);
+  backdrop-filter:blur(12px);
+}
+.pas-badge__icon{ font-size:1.3rem; }
+.pas-badge.is-earned{
+  color:#fff;
+  border-color:transparent;
+  opacity:1;
+  animation:pasBadgeUnlock .55s cubic-bezier(.2,.85,.32,1.25) both;
+}
+.pas-badge[data-badge="fomento"].is-earned{
+  background:linear-gradient(135deg,#079bc9,#eab308);
+  box-shadow:0 0 26px rgba(0,194,255,.28);
+}
+.pas-badge[data-badge="unidades"].is-earned{
+  background:linear-gradient(135deg,var(--pe-secondary),var(--pe-pink));
+  box-shadow:0 0 26px rgba(236,72,153,.28);
+}
+.pas-badge[data-badge="incubacion"].is-earned{
+  background:linear-gradient(135deg,#16a34a,var(--pe-orange));
+  box-shadow:0 0 26px rgba(34,197,94,.26);
+}
+@keyframes pasBadgeUnlock{
+  from{ opacity:0; transform:scale(.75) rotate(-3deg); }
+  to{ opacity:1; transform:scale(1) rotate(0); }
+}
+
+/* Modal y minijuegos */
+.pas-modal__backdrop{
+  background:rgba(6,12,28,.76);
+  backdrop-filter:blur(9px);
+}
+.pas-modal__panel{
+  border:1px solid rgba(255,255,255,.8);
+  background:linear-gradient(155deg,#fff,#f4f7fb);
+  box-shadow:0 30px 90px rgba(0,0,0,.4),0 0 40px rgba(124,58,237,.14);
+}
+.pas-modal__panel::before{
+  content:"";
+  position:absolute;
+  z-index:3;
+  top:0;
+  left:24px;
+  right:24px;
+  height:6px;
+  border-radius:0 0 999px 999px;
+  background:var(--pe-gradient-main);
+}
+.pas-modal__close{
+  color:var(--pe-secondary);
+  box-shadow:0 8px 24px rgba(15,23,42,.13);
+}
+.pas-modal__eyebrow{
+  color:var(--pe-secondary);
+  background:rgba(124,58,237,.08);
+  padding:5px 9px;
+  border-radius:999px;
+}
+.pas-modal__title{ font-size:1.55rem; }
+.pas-modal__subtitle{ color:var(--pe-secondary); }
+.pas-game-counter{
+  color:#fff;
+  background:var(--pe-gradient-main);
+  box-shadow:0 10px 25px rgba(124,58,237,.2);
+}
+.pas-game-counter__value{
+  color:#111827;
+  background:var(--pe-accent);
+  padding:4px 9px;
+  border-radius:999px;
+}
+.pas-game-scene{
+  border-color:rgba(0,194,255,.45);
+  box-shadow:inset 0 0 45px rgba(0,194,255,.08),0 14px 34px rgba(15,23,42,.12);
+}
+.pas-hotspot{
+  border-color:rgba(0,194,255,.42);
+  background:rgba(255,255,255,.38);
+  box-shadow:0 0 0 0 rgba(0,194,255,.2);
+  animation:pasHotspotPulse 2.1s ease-in-out infinite;
+}
+@keyframes pasHotspotPulse{
+  50%{ box-shadow:0 0 0 8px rgba(0,194,255,0); transform:translate(-50%,-50%) scale(1.035); }
+}
+.pas-hotspot:hover:not(.is-found),
+.pas-hotspot:focus-visible{
+  border-color:var(--pe-accent);
+  box-shadow:0 0 22px rgba(250,204,21,.3);
+}
+.pas-hotspot.is-found{
+  color:#fff;
+  border-color:transparent;
+  background:var(--pe-gradient-success);
+  box-shadow:0 12px 28px rgba(34,197,94,.25);
+  animation:pasFoundPop .35s ease both;
+}
+@keyframes pasFoundPop{
+  50%{ transform:translate(-50%,-50%) scale(1.18); }
+}
+.pas-hotspot.is-found::after{
+  background:var(--pe-secondary);
+  box-shadow:0 5px 14px rgba(124,58,237,.32);
+}
+.pas-hotspot--concept{
+  background:rgba(255,255,255,.94);
+  border-color:rgba(124,58,237,.22);
+}
+.pas-game-inventory__item{
+  border-color:rgba(124,58,237,.24);
+  background:#fff;
+}
+.pas-game-inventory__item.is-found{
+  color:#fff;
+  border-color:transparent;
+  background:var(--pe-gradient-success);
+  box-shadow:0 7px 18px rgba(34,197,94,.18);
+}
+.pas-mission-result__badge{
+  width:84px;
+  height:84px;
+  display:grid;
+  place-items:center;
+  margin:4px auto 10px;
+  border-radius:26px;
+  background:var(--pe-gradient-warning);
+  box-shadow:0 15px 35px rgba(251,146,60,.28);
+  animation:pasBadgeUnlock .55s ease both;
+}
+.pas-mission-result__points{
+  color:#fff;
+  background:var(--pe-gradient-success);
+  box-shadow:0 8px 20px rgba(34,197,94,.2);
+}
+
+/* Pasaporte como credencial digital de logro */
+.pas-final{
+  max-width:860px;
+  background:rgba(255,255,255,.96);
+  border-color:rgba(255,255,255,.72);
+  box-shadow:0 32px 90px rgba(0,0,0,.36),0 0 50px rgba(0,194,255,.12);
+}
+.pas-final > .pas-eyebrow{
+  color:#fff;
+  background:var(--pe-gradient-main);
+  border:0;
+}
+.pas-passport-card{
+  overflow:hidden;
+  padding:30px;
+  border:3px solid transparent;
+  background:
+    linear-gradient(#fff,#fff) padding-box,
+    var(--pe-gradient-main) border-box;
+  box-shadow:0 24px 55px rgba(15,23,42,.2),0 0 28px rgba(0,194,255,.16);
+}
+.pas-passport-card::before{
+  content:"COMPLETADO";
+  position:absolute;
+  z-index:3;
+  right:24px;
+  top:105px;
+  padding:6px 11px;
+  border:1px solid rgba(34,197,94,.32);
+  border-radius:999px;
+  color:#087c3a;
+  background:#dcfce7;
+  font:700 .66rem var(--pas-fuente-display);
+  letter-spacing:.08em;
+  transform:rotate(2deg);
+}
+.pas-passport-card::after{
+  color:rgba(124,58,237,.055);
+  font-size:3.6rem;
+}
+.pas-passport-card__head{
+  margin:-30px -30px 0;
+  padding:24px 30px 20px;
+  border:0;
+  background:var(--pe-gradient-main);
+}
+.pas-passport-card__head span{ color:rgba(255,255,255,.78); }
+.pas-passport-card__head h2{ color:#fff; }
+.pas-passport-card__avatar{
+  background:var(--pe-gradient-main);
+  box-shadow:0 12px 28px rgba(124,58,237,.28);
+}
+.pas-passport-card__identity strong{ font-size:1.3rem; }
+.pas-passport-card__data div{
+  border-color:#e5eaf0;
+  background:#f8fafc;
+}
+.pas-passport-card__data div:first-child{
+  color:#fff;
+  border-color:transparent;
+  background:var(--pe-gradient-success);
+  box-shadow:0 9px 20px rgba(34,197,94,.16);
+}
+.pas-passport-card__data div:first-child dt,
+.pas-passport-card__data div:first-child dd{ color:#fff; }
+.pas-passport-card__folio{
+  border-color:rgba(124,58,237,.16) !important;
+  background:linear-gradient(135deg,#f3e8ff,#e0f7ff) !important;
+}
+.pas-final__badges .pas-badge{
+  color:#fff;
+  border:0;
+  opacity:1;
+  box-shadow:0 10px 22px rgba(15,23,42,.12);
+}
+.pas-final__badges .pas-badge:nth-child(1){ background:linear-gradient(135deg,#079bc9,#eab308); }
+.pas-final__badges .pas-badge:nth-child(2){ background:linear-gradient(135deg,var(--pe-secondary),var(--pe-pink)); }
+.pas-final__badges .pas-badge:nth-child(3){ background:linear-gradient(135deg,#16a34a,var(--pe-orange)); }
+.pas-final__next{
+  color:#fff;
+  background:var(--pe-gradient-main);
+  box-shadow:0 12px 28px rgba(124,58,237,.18);
+}
+
+/* Toasts, pie y detalles */
+.pas-toast{
+  border:1px solid rgba(255,255,255,.16);
+  border-left:4px solid var(--pe-accent);
+  background:linear-gradient(135deg,#111827,#312e81);
+  box-shadow:0 18px 45px rgba(0,0,0,.34),0 0 24px rgba(0,194,255,.14);
+}
+.pas-footer{ color:rgba(255,255,255,.48); }
+.pas-admin-export{ color:rgba(255,255,255,.6); }
+#pasConfetti{ opacity:.78; }
+
+@media (max-width:560px){
+  .pas-wrapper{ overflow:hidden; }
+  .pas-welcome{ padding:38px 18px 28px; }
+  .pas-welcome::after{ right:18px; top:18px; }
+  .pas-welcome__title{ font-size:2.35rem; }
+  .pas-register{ padding:21px 15px; }
+  .pas-motivation{ width:auto; border-radius:17px; }
+  .pas-station{ padding:28px 18px 23px; }
+  .pas-passport-card{ padding:20px 16px; }
+  .pas-passport-card__head{
+    margin:-20px -16px 0;
+    padding:22px 16px 18px;
+  }
+  .pas-passport-card::before{
+    right:14px;
+    top:102px;
+    font-size:.58rem;
+  }
+  .pas-modal__panel::before{ left:18px; right:18px; }
+}
+
+@media print{
+  @page{ size:auto; margin:12mm; }
+  body{ background:#fff; }
+  .pas-topbar,
+  #screen-bienvenida,
+  #screen-mapa,
+  .pas-final > .pas-eyebrow,
+  .pas-final__text,
+  .pas-final__next,
+  .pas-final__actions,
+  .pas-footer,
+  .pas-modal,
+  .pas-toast-region,
+  #pasConfetti{ display:none !important; }
+  .pas-wrapper{ min-height:0; max-width:none; padding:0; background:#fff; }
+  #screen-final{ display:block !important; }
+  .pas-final{ max-width:none; margin:0; padding:0; border:0; box-shadow:none; }
+  .pas-passport-card{ max-width:760px; margin:0 auto; box-shadow:none; break-inside:avoid; }
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce){
+  .pas-screen,
+  .pas-station,
+  .pas-modal__panel,
+  .pas-modal__backdrop,
+  .pas-hotspot,
+  .pas-badge,
+  .pas-welcome::after,
+  .pas-mission-result__badge{
+    animation:none !important;
+    transition:none !important;
+  }
+}
