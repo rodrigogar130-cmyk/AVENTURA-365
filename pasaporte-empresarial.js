@@ -92,7 +92,7 @@
       mensajeCorrecto: "¡Felicidades! Completaste las tres estaciones de Aventura 365. Ya conoces Fomento Empresarial, Unidades de Emprendimiento e Incubación de la Innovación.",
       mensajeIncorrecto: "Casi lo logras. La respuesta se relaciona con la forma en que un proyecto define cliente, valor, operación, mercado e ingresos.",
       motivacion: "¡Aventura completada! Desbloqueaste tu insignia de ganador.",
-      insignia: { nombre: "Incubacion de la Innovacion", icono: "🚀" },
+      insignia: { nombre: "Incubación de la Innovación", icono: "🚀" },
     },
   ];
 
@@ -303,14 +303,14 @@
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       formRegistro.elements.correo.setAttribute("aria-invalid", "true");
-      return { valid: false, message: "Escribe un correo personal valido, por ejemplo: nombre@gmail.com." };
+      return { valid: false, message: "Escribe un correo personal válido, por ejemplo: nombre@gmail.com." };
     }
     if (phoneDigits.length < 10) {
       formRegistro.elements.telefono.setAttribute("aria-invalid", "true");
-      return { valid: false, message: "El telefono debe tener al menos 10 digitos." };
+      return { valid: false, message: "El teléfono debe tener al menos 10 dígitos." };
     }
     if (!formRegistro.elements.consentimiento.checked) {
-      return { valid: false, message: "Necesitamos tu aceptacion para registrar la participacion y dar seguimiento." };
+      return { valid: false, message: "Necesitamos tu aceptación para registrar la participación y dar seguimiento." };
     }
     return { valid: true };
   }
