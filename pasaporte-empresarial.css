@@ -57,6 +57,11 @@
   box-sizing:border-box;
 }
 
+.pas-wrapper [hidden],
+.pas-modal [hidden]{
+  display:none !important;
+}
+
 html{ scroll-behavior:smooth; }
 body{
   margin:0;
@@ -973,19 +978,6 @@ body.pas-modal-open{ overflow:hidden; }
   line-height:1.4;
 }
 
-.pas-riddle-card__text{
-  display:flex;
-  flex-direction:column;
-  gap:4px;
-  margin-bottom:20px;
-  padding:18px;
-  border:1px dashed rgba(124,58,237,.24);
-  border-radius:16px;
-  color:var(--pas-verde-900);
-  background:rgba(255,255,255,.78);
-  font:600 .96rem/1.6 var(--pas-fuente-display);
-}
-
 .pas-riddle-form{
   display:grid;
   grid-template-columns:1fr auto;
@@ -1451,7 +1443,6 @@ body.pas-modal-open{ overflow:hidden; }
   .pas-modal__scroll{ max-height:94vh; padding:32px 16px 20px; }
   .pas-riddle-card{ padding:18px 14px; }
   .pas-riddle-card__location{ border-radius:14px; }
-  .pas-riddle-card__text{ padding:14px; font-size:.88rem; }
   .pas-riddle-form{ grid-template-columns:1fr; }
   .pas-riddle-form .pas-btn{ width:100%; }
   .pas-mission-options--grid{ grid-template-columns:1fr; }

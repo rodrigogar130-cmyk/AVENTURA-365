@@ -32,14 +32,6 @@
       titulo: "Estación 1: Fomento Empresarial",
       ubicacion: "Facultad de Arquitectura y Diseño",
       indicacion: "Dirígete a la Facultad de Arquitectura y Diseño. Busca el cartel de Fomento Empresarial, lee la información y responde la adivinanza para desbloquear la siguiente estación.",
-      adivinanza: [
-        "Nací de un problema que alguien logró observar,",
-        "no soy negocio todavía, pero puedo comenzar.",
-        "Si me estudias, preguntas y buscas solución,",
-        "puedo convertirme en proyecto con visión.",
-        "",
-        "¿Qué soy?",
-      ],
       respuestasAceptadas: ["oportunidad", "una oportunidad", "oportunidades"],
       mensajeCorrecto: "¡Correcto! Fomento Empresarial impulsa la cultura emprendedora, la detección de oportunidades y el desarrollo inicial de competencias. Ahora continúa hacia la Facultad de Derecho.",
       mensajeIncorrecto: "Aún no es la respuesta. Lee nuevamente la adivinanza del cartel y vuelve a intentarlo.",
@@ -53,17 +45,6 @@
       titulo: "Estación 2: Unidades de Emprendimiento",
       ubicacion: "Facultad de Derecho",
       indicacion: "Dirígete a la Facultad de Derecho. Busca el cartel de Unidades de Emprendimiento, lee la información y responde la adivinanza para desbloquear la última estación.",
-      adivinanza: [
-        "Una idea sola puede empezar,",
-        "pero con más talento puede avanzar.",
-        "Alguien crea, alguien organiza,",
-        "otro comunica y otro analiza.",
-        "",
-        "Si todos colaboran con un mismo objetivo,",
-        "el proyecto se vuelve más fuerte y creativo.",
-        "",
-        "¿Qué soy?",
-      ],
       respuestasAceptadas: ["equipo", "un equipo", "equipo emprendedor", "trabajo en equipo"],
       mensajeCorrecto: "¡Muy bien! Las Unidades de Emprendimiento conectan talento universitario, equipos, retos y experiencias como Hackathon, Bootcamp, Emprende Academy 365 y Demo Day. Ya casi terminas la aventura.",
       mensajeIncorrecto: "Todavía no es la respuesta. Observa la pista: la clave está en colaborar con otros talentos.",
@@ -77,17 +58,6 @@
       titulo: "Estación 3: Incubación de la Innovación",
       ubicacion: "Facultad de Contaduría y Administración",
       indicacion: "Dirígete a la Facultad de Contaduría y Administración. Busca el cartel de Incubación de la Innovación, lee la información y responde la última adivinanza para completar Aventura 365.",
-      adivinanza: [
-        "No basta con tener una idea brillante,",
-        "hay que saber para quién será importante.",
-        "Defino cliente, valor y operación,",
-        "también ingresos, mercado y proyección.",
-        "",
-        "Con mentoría puedo crecer,",
-        "y hacia el mercado me puedo mover.",
-        "",
-        "¿Qué soy?",
-      ],
       respuestasAceptadas: ["modelo de negocio", "modelo", "modelo empresarial", "modelo de negocios"],
       mensajeCorrecto: "¡Felicidades! Completaste las tres estaciones de Aventura 365. Ya conoces Fomento Empresarial, Unidades de Emprendimiento e Incubación de la Innovación.",
       mensajeIncorrecto: "Casi lo logras. La respuesta se relaciona con la forma en que un proyecto define cliente, valor, operación, mercado e ingresos.",
@@ -455,7 +425,7 @@
   }
 
   /* ------------------------------------------------------------------
-     ESTACIONES CON ADIVINANZAS
+     ESTACIONES FISICAS Y VALIDACION DE RESPUESTAS
      ------------------------------------------------------------------ */
   function normalizeAnswer(value) {
     return String(value || "")
@@ -477,7 +447,7 @@
     $("#misionTitulo").textContent = station.area;
     $("#misionSubtitulo").hidden = false;
     $("#misionSubtitulo").textContent = station.ubicacion;
-    $("#misionInstruccion").textContent = station.indicacion;
+    $("#misionInstruccion").textContent = `Dirígete a ${station.ubicacion}. Encuentra el cartel físico de ${station.area} y escribe aquí la respuesta.`;
     optionsContainer.innerHTML = "";
     optionsContainer.className = "pas-mission-options pas-mission-options--riddle";
     missionPanel.classList.remove("pas-modal__panel--game");
@@ -489,19 +459,7 @@
 
     const location = document.createElement("p");
     location.className = "pas-riddle-card__location";
-    location.textContent = `Ubicación: ${station.ubicacion}`;
-
-    const riddle = document.createElement("div");
-    riddle.className = "pas-riddle-card__text";
-    station.adivinanza.forEach((line) => {
-      if (!line) {
-        riddle.appendChild(document.createElement("br"));
-        return;
-      }
-      const span = document.createElement("span");
-      span.textContent = line;
-      riddle.appendChild(span);
-    });
+    location.textContent = `Destino: ${station.ubicacion}`;
 
     const form = document.createElement("form");
     form.className = "pas-riddle-form";
@@ -561,7 +519,7 @@
       showToast(station.mensajeIncorrecto);
     });
 
-    card.append(location, riddle, form);
+    card.append(location, form);
     optionsContainer.appendChild(card);
     window.setTimeout(() => input.focus(), 80);
   }
@@ -681,6 +639,12 @@
   }
 
   $("#btnVerFinal").addEventListener("click", () => {
+    if (completedCount() < 3) {
+      updateView();
+      showScreen("screen-mapa");
+      showToast("Completa las tres estaciones para desbloquear tu insignia de ganador.");
+      return;
+    }
     renderBadge();
     saveCompletedRecord();
     showScreen("screen-final");
