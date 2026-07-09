@@ -318,12 +318,8 @@
     saveState();
     updateView();
     showScreen("screen-mapa");
-      showToast(`¡Excelente, ${firstName(state.participante.nombre)}! Tu Aventura 365 ha comenzado. Dirígete a la primera estación para encontrar la primera pista.`);
+      showToast(`¡Excelente, equipo ${state.participante.nombre}! Tu Aventura 365 ha comenzado. Dirígete a la primera estación para encontrar la primera pista.`);
   });
-
-  function firstName(fullName) {
-    return String(fullName || "explorador").trim().split(/\s+/)[0];
-  }
 
   /* ------------------------------------------------------------------
      ESTADO VISUAL, DESBLOQUEOS Y PUNTOS
@@ -357,7 +353,7 @@
     $("#progressFill").style.width = `${percentage}%`;
     $("#progressLabel").textContent = `${count}/3 estaciones completadas`;
     $("#progressBar").setAttribute("aria-valuenow", String(count));
-    $("#mapParticipantName").textContent = state.participante ? firstName(state.participante.nombre) : "explorador";
+    $("#mapParticipantName").textContent = state.participante ? state.participante.nombre : "explorador";
 
     const motivation = $("#motivationMessage");
     motivation.textContent = motivationFor(count);
@@ -668,9 +664,9 @@
 
 Completé Aventura 365.
 
-Mi nombre es: ${participant.nombre}
+Nombre del equipo: ${participant.nombre}
 Espacio académico: ${participant.espacio}
-Programa educativo: ${participant.programa}
+Licenciatura: ${participant.programa}
 Semestre: ${participant.semestre}
 Correo personal: ${participant.correo}
 Teléfono/WhatsApp: ${participant.telefono}
@@ -687,9 +683,9 @@ Quiero recibir información para integrarme a las actividades de la Dirección d
 
 Completé Aventura 365.
 
-Mi nombre es: ${participant.nombre}
+Nombre del equipo: ${participant.nombre}
 Espacio académico: ${participant.espacio}
-Programa educativo: ${participant.programa}
+Licenciatura: ${participant.programa}
 Semestre: ${participant.semestre}
 Correo personal: ${participant.correo}
 Folio: ${state.folio}
